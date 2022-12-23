@@ -20,7 +20,7 @@ function Team( { teamChars , setTeamChars} ) {
     })
 
     const charStrengths = teamChars.map((char) => {
-        const filler = char.strengths.keywords.sort().map((word) => {
+        const filler = char.strengths_keywords.sort().map((word) => {
             return (
                     <ul className="details">+{word}</ul>
             )
@@ -31,7 +31,7 @@ function Team( { teamChars , setTeamChars} ) {
     })
 
     const charWeaknesses = teamChars.map((char)=>{
-        const filler = char.weaknesses.keywords.sort().map((word) => {
+        const filler = char.weaknesses_keywords.sort().map((word) => {
             return (
                     <ul className="details">-{word}</ul>
 

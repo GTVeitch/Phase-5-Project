@@ -3,7 +3,7 @@ import React from "react";
 function CharRoles( { teamChars } ) {
 
     const charRoles = teamChars.map((char) => {
-        const prePos = ((char.positions.point[0]==1)?"Point":(char.positions.mid[0]==1?"Mid":"Anchor"))
+        const prePos = ((char.point_num==1)?"Point":(char.mid_num==1?"Mid":"Anchor"))
         return (
             <td>{prePos}</td>
         )

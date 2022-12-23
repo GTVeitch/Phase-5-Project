@@ -3,9 +3,9 @@ import React from "react";
 function CharImages ( { teamChars } ){
 
     const charImages = teamChars.map((char) => {
-        const weaknesses = char.weaknesses.text.map((str) => str+"\n")
+        const weaknesses = char.weaknesses_text.map((str) => str+"\n")
         return (
-            <td key={char.images.mainImage} title={weaknesses}><img src={char.images.mainImage} className="teamImages" alt=""/></td>
+            <td key={char.teamImage} title={weaknesses}><img src={char.teamImage} className="teamImages" alt=""/></td>
         )
 
     })

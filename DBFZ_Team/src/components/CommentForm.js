@@ -1,11 +1,13 @@
 import React , { useState } from "react";
 
-function CommentForm( { char , user , setCharComs , charComs } ) {
+function CommentForm( { char , user } ) {
 
     const [newComment, setNewComment] = useState({
-        name: user.name,
+        username: user.username,
         content: null,
-        votes: 0
+        votes: 0,
+        user_id: user.id,
+        character_id: char.id
     })
 
     function handleChange(e) {
@@ -16,16 +18,13 @@ function CommentForm( { char , user , setCharComs , charComs } ) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        fetch(`http://localhost:3000/characters/${char.id}`, {
-            method : "PATCH",
+        fetch(`http://localhost:3000/comments`, {
+            method : "POST",
             headers : {
                 "Content-Type" : "application/json"
             },
-            body : JSON.stringify({...char,
-                     comments : [...char.comments, newComment]
-                    })
+            body : JSON.stringify(newComment)
         })
-        .then(setCharComs([...charComs, newComment]))
 
     }
 

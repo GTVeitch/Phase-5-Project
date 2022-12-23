@@ -1,32 +1,39 @@
-import React , {useState} from "react";
+import React , { useState , useEffect } from "react";
 import CommentForm from "./CommentForm"
 import CharComments from "./CharComments"
 import CharacterMenu from "./CharacterMenu";
 
 function CharPage ( { char , user , characters } ) {
 
-    const [charComs, setCharComs] = useState(char.comments.sort((a, b) => parseFloat(b.votes) - parseFloat(a.votes)))
+    const [comms, setComms] = useState([])
 
 
-    const charStrengths = char.strengths.keywords.sort().map((word) => {
+    useEffect(() => {
+        fetch(`http://localhost:3000/characters/${char.id}`)
+        .then(r=> r.json())
+        .then(res => setComms(res.comments))
+    }, [])
+
+
+
+    const charStrengths = char.strengths_keywords.map((word) => {
             return (
                     <ul className="details">+{word}</ul>
             )
         })
 
-    const charWeaknesses = char.weaknesses.keywords.sort().map((word) => {
+    const charWeaknesses = char.weaknesses_keywords.map((word) => {
             return (
                     <ul className="details">-{word}</ul>
             )
         })
 
-    const charComments = charComs.map((comment) => {
+    const charComments = comms.map((comment) => {
 
-        const otherComments = char.comments.filter(comm => comm!= comment)
 
         return (
             <>
-                <CharComments comment={comment} char={char} otherComments={otherComments}></CharComments>
+                <CharComments char={char} comment={comment}></CharComments>
             </>
         )
 
@@ -41,7 +48,7 @@ function CharPage ( { char , user , characters } ) {
                             {char.name}
                         </tr>
                         <tr  className="teamCharContainer">
-                            <img src={char.images.mainImage} alt="" className="teamImages"/>
+                            <img src={char.teamImage} alt="" className="teamImages"/>
                         </tr>
                         <tr  className="teamCharContainer">
                             <span>{charStrengths}</span>
@@ -59,7 +66,7 @@ function CharPage ( { char , user , characters } ) {
                 </table>
             </div>
             <br></br>
-            {user?<CommentForm char={char} user={user} charComs={charComs} setCharComs={setCharComs}/>:null}
+            {user?<CommentForm char={char} user={user}/>:null}
             <br></br>
             <CharacterMenu characters={characters} commentPage={true}/>
         </>

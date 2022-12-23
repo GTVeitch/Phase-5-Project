@@ -2,7 +2,8 @@ import React , { useState } from "react";
 
 function Login({ setUser }) {
 
-    const [name, setname] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("")
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -11,10 +12,10 @@ function Login({ setUser }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({username: username, password: "first" }),
       })
         .then((r) => r.json())
-        .then((user) => setUser({...user , name: name}));
+        .then((user) => console.log(user));
     }
 
     return (
@@ -22,9 +23,14 @@ function Login({ setUser }) {
         {/* <h2>"Type your project name just as you did for our form, include the spaces:)"</h2> */}
         <input
           type="text"
-          value={name}
-          onChange={(e) => setname(e.target.value)}
-          placeholder="Enter name..."/>
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter Password..."/>
+          <input
+          type="text"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter Password..."/>
         <button type="submit">Login</button>
       </form>
     );

@@ -6,7 +6,7 @@ function CharacterMenu( { characters , teamChars , setTeamChars , setCurrentChar
     const buttons = characters.map((char) => {
         return (
             <>
-                <CharacterButton key={char.id} commentPage={commentPage} char={char} image={char.images.pixelImage} teamChars={teamChars} setTeamChars={setTeamChars} setCurrentChar={setCurrentChar}/>
+                <CharacterButton key={char.id} commentPage={commentPage} char={char} image={char.pixelImage} teamChars={teamChars} setTeamChars={setTeamChars} setCurrentChar={setCurrentChar}/>
                 {char.id === 15 ? <br/>: null}
                 {char.id === 29? <br/> : null}
             </>

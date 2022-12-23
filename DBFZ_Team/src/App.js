@@ -16,13 +16,19 @@ function App() {
     fetch("http://localhost:3000/characters")
     .then(r=>r.json())
     .then(chars => {
-      setCharacters(chars)
+      setCharacters(chars.map((char) => ({
+        ...char,
+        //breaks the text into arrays
+        strengths_keywords: ("\" " + char.strengths_keywords + " \"").replaceAll("[", "").replaceAll("]", "").replaceAll(",", "").split("\" \"").slice(1, -1),
+        weaknesses_keywords: ("\" " + char.weaknesses_keywords + " \"").replaceAll("[", "").replaceAll("]", "").replaceAll(",", "").split("\" \"").slice(1, -1),
+        strengths_text: ("\" " + char.strengths_text + " \"").replaceAll("[", "").replaceAll("]", "").replaceAll(",", "").split("\" \"").slice(1, -1),
+        weaknesses_text: ("\" " + char.weaknesses_text + " \"").replaceAll("[", "").replaceAll("]", "").replaceAll(",", "").split("\" \"").slice(1, -1)
+      })))
     })
   }, [])
 
 
   const charPages = characters.map((char) => {
-
     return (
         <Route path={`/characters/${char.id}`} key={char.id}>
           <CharPage char={char} user={user} characters={characters}/>

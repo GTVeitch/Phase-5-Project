@@ -1,6 +1,6 @@
 import React , { useState } from "react"
 
-function CharComments ( { char , comment , otherComments } ) {
+function CharComments ( { char , comment } ) {
 
     const [votes, setVotes] = useState(comment.votes)
 
@@ -9,16 +9,15 @@ function CharComments ( { char , comment , otherComments } ) {
         function handleClick(e){
             e.preventDefault()
             filler.votes += 1
-            fetch(`http://localhost:3000/characters/${char.id}`, {
+            console.log(filler)
+            fetch(`http://localhost:3000/comments/${comment.id}`, {
                 method : 'PATCH',
                 headers : { "content-type" : "application/json"},
-                body : JSON.stringify({...char,
-                    comments : [...otherComments , filler]
+                body : JSON.stringify({...comment,
+                votes: comment.votes+1 })
                    })
-
-
-            })
-            .then(setVotes(votes+1))
+            .then(r=>r.json())
+            .then(res => setVotes(res.votes))
 
         }
 
@@ -26,7 +25,7 @@ function CharComments ( { char , comment , otherComments } ) {
     return (
             <div className="comments">
                 <span className="details">
-                    <ul>{comment.name}</ul><span className="score" onClick={e => handleClick(e)} id={comment.id}>{votes}</span>
+                    <ul>{comment.username}</ul><span className="score" onClick={e => handleClick(e)} id={comment.id}>{votes}</span>
                     <ul>{comment.content}</ul>
                 </span>
             </div>

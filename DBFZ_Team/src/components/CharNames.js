@@ -3,7 +3,7 @@ import React from "react";
 function CharNames ( { teamChars }) {
 
     const charNames = teamChars.map((char) => {
-        const strengths = char.strengths.text.map((str) => str+"\n")
+        const strengths = char.strengths_text.map((str) => str+"\n")
         return (
             <>
             <td key={char.name} title={strengths}>{char.name}</td>
