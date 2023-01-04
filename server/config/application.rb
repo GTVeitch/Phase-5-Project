@@ -23,5 +23,15 @@ module App
     config.middleware.use ActionDispatch::Session::CookieStore
 
     config.action_dispatch.cookies_same_site_protection = :strict
+
+
+    Rails.application.config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:3001'
+        resource '*', headers: :any, methods: [:index, :show]
+        resource 'comments', headers: :any, methods: [:index, :show, :create, :update, :patch]
+      end
+    end
+
   end
 end

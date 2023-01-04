@@ -66,6 +66,7 @@ group :development do
   # gem "spring"
 end
 
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
@@ -73,6 +74,6 @@ group :test do
   gem "webdrivers"
 end
 
-gem "rack-cors"
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'active_model_serializers'

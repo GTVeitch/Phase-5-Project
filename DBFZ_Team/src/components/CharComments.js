@@ -12,7 +12,10 @@ function CharComments ( { char , comment } ) {
             console.log(filler)
             fetch(`http://localhost:3000/comments/${comment.id}`, {
                 method : 'PATCH',
-                headers : { "content-type" : "application/json"},
+                headers : {
+                    "Content-Type" : "application/json",
+                    Accept: "application/json"
+                    },
                 body : JSON.stringify({...comment,
                 votes: comment.votes+1 })
                    })
