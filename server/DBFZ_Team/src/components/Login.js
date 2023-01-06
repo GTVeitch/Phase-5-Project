@@ -1,6 +1,6 @@
 import React , { useState } from "react";
 
-function Login({ setUser }) {
+function Login({ user , setUser }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("")
@@ -16,14 +16,14 @@ function Login({ setUser }) {
       })
         .then((r) => r.json())
         .then((res) => {
-          console.log(res)
-          setUser(res)
-        });
-    }
+          res.username?setUser(res):setUser(null)})
+        }
+
 
     return (
       <form onSubmit={handleSubmit} className="loginForm">
-        {/* <h2>"Type your project name just as you did for our form, include the spaces:)"</h2> */}
+        {user.username?`You're logged in as ${user.username}`:null}
+        <br></br>
         <input
           type="text"
           value={username}

@@ -11,7 +11,7 @@ function App() {
 
   const [characters, setCharacters] = useState([])
   const [teamChars, setTeamChars] = useState([])
-  const [user, setUser] = useState()
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     fetch("/characters")
