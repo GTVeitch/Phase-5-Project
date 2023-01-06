@@ -9,7 +9,7 @@ function CharPage ( { char , user , characters } ) {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/characters/${char.id}`)
+        fetch(`/characters/${char.id}`)
         .then(r=> r.json())
         .then(res => setComms(res.comments))
     }, [])
@@ -28,7 +28,7 @@ function CharPage ( { char , user , characters } ) {
             )
         })
 
-    const charComments = comms.map((comment) => {
+    const charComments = comms.sort((a, b) => b.votes - a.votes ).map((comment) => {
 
 
         return (
@@ -66,7 +66,7 @@ function CharPage ( { char , user , characters } ) {
                 </table>
             </div>
             <br></br>
-            {user?<CommentForm char={char} user={user}/>:null}
+            {user?<CommentForm char={char} user={user} comms={comms} setComms={setComms}/>:null}
             <br></br>
             <CharacterMenu characters={characters} commentPage={true}/>
         </>

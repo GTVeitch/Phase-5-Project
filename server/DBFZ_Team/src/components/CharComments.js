@@ -1,29 +1,27 @@
 import React , { useState } from "react"
 
-function CharComments ( { char , comment } ) {
+function CharComments ( { comment } ) {
 
     const [votes, setVotes] = useState(comment.votes)
 
-    let filler = comment
-
         function handleClick(e){
             e.preventDefault()
-            filler.votes += 1
-            console.log(filler)
-            fetch(`http://localhost:3000/comments/${comment.id}`, {
+            fetch(`/comments/${comment.id}`, {
                 method : 'PATCH',
-                mode : "cors",
                 headers : {
                     "Content-Type" : "application/json",
-                    Accept: "application/json"
+                    "Accept": "application/json",
+                    "Access-Control-Allow-Methods": "PATCH"
                     },
-                body : JSON.stringify({...comment,
-                votes: comment.votes+1 })
+                body : JSON.stringify( {
+                    ...comment,
+                    votes: comment.votes+1 } )
                    })
             .then(r=>r.json())
             .then(res => setVotes(res.votes))
 
         }
+
 
 
     return (

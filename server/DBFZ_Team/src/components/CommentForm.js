@@ -1,6 +1,6 @@
 import React , { useState } from "react";
 
-function CommentForm( { char , user } ) {
+function CommentForm( { char , user , comms, setComms } ) {
 
     const [newComment, setNewComment] = useState({
         username: user.username,
@@ -18,13 +18,15 @@ function CommentForm( { char , user } ) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        fetch(`http://localhost:3000/comments`, {
+        fetch(`/comments`, {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json"
             },
             body : JSON.stringify(newComment)
         })
+        .then(r=>r.json())
+        .then(res => setComms([...comms, res]))
 
     }
 

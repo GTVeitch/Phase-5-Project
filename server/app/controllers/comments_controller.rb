@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
 
     def update
         if @comment.valid?
-            @comment.update(params)
+            @comment.update(comment_params)
             if @comment.valid?
               render json: @comment, status: :accepted
             else

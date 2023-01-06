@@ -8,8 +8,18 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+
+
+    # Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins '*'
+    #     resource '*', headers: :any, methods: :any
+    #   end
+    # end
+
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -25,13 +35,7 @@ module App
     config.action_dispatch.cookies_same_site_protection = :strict
 
 
-    Rails.application.config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'localhost:3001'
-        resource '*', headers: :any, methods: [:index, :show]
-        resource 'comments', headers: :any, methods: [:index, :show, :create, :update, :patch]
-      end
-    end
+
 
   end
 end

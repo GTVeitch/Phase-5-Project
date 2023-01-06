@@ -5,7 +5,7 @@ function NavBar( { user , setUser } ) {
 
     function logout(e) {
         e.preventDefault();
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

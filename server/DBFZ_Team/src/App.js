@@ -5,6 +5,7 @@ import Team from './components/Team';
 import CharPage from './components/CharPage';
 import NavBar from './components/NavBar';
 import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    fetch("http://localhost:3000/characters")
+    fetch("/characters")
     .then(r=>r.json())
     .then(chars => {
       setCharacters(chars.map((char) => ({
@@ -25,6 +26,9 @@ function App() {
         weaknesses_text: ("\" " + char.weaknesses_text + " \"").replaceAll("[", "").replaceAll("]", "").replaceAll(",", "").split("\" \"").slice(1, -1)
       })))
     })
+    .then(fetch("/me")
+    .then(r=>r.json())
+    .then(res => setUser(res)))
   }, [])
 
 
@@ -54,6 +58,10 @@ function App() {
 
         <Route exact path="/login">
           <LoginPage setUser={setUser} user={user}></LoginPage>
+        </Route>
+
+        <Route exact path ="/signup">
+          <SignupPage setUser={setUser} user={user}></SignupPage>
         </Route>
 
         <Route exact path="/">

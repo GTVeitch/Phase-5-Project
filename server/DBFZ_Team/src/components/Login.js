@@ -7,15 +7,18 @@ function Login({ setUser }) {
 
     function handleSubmit(e) {
       e.preventDefault();
-      fetch("http://localhost:3000/login", {
+      fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({username: username, password: "first" }),
+        body: JSON.stringify({username: username, password: password }),
       })
         .then((r) => r.json())
-        .then((user) => console.log(user));
+        .then((res) => {
+          console.log(res)
+          setUser(res)
+        });
     }
 
     return (
@@ -25,12 +28,14 @@ function Login({ setUser }) {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter Password..."/>
+          placeholder="Username"/>
+          <br></br>
           <input
           type="text"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter Password..."/>
+          placeholder="Password"/>
+          <br></br>
         <button type="submit">Login</button>
       </form>
     );
