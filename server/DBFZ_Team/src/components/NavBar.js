@@ -12,7 +12,7 @@ function NavBar( { user , setUser } ) {
             },
             body: JSON.stringify(user.username),
         })
-            .then(setUser(null));
+            .then(setUser({}));
     }
 
     return(
@@ -22,7 +22,7 @@ function NavBar( { user , setUser } ) {
                 <Link to="/">Team Builder</Link>
                 <span>   ||   </span>
                 <Link to="/characters/1">Character Commenter</Link>
-                {user ?
+                {user.username ?
                 <span className="loginLink" onClick={logout}>Logout</span> :
                 <Link className="loginLink" to="/login">Login</Link>}
             </div>

@@ -1,24 +1,7 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Features
+- Developed Ruby On Rails backend API with error handling and validations
+- Incorporated JavaScript fetch requests to send and receive information from API
+- Used HTML forms to create user signup and sign in
+- Enabled users to remain logged in when page refreshes via backend sessions
+- Leveraged React Router to make the use of a multitude of pages more efficient

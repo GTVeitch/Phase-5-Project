@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
 
-    before_action :set_comment, only: [:update, :show]
+    before_action :set_comment, only: [:update, :show, :delete]
     #before_action :authorized, only: [:create, :update]
 
     def index
@@ -33,6 +33,15 @@ class CommentsController < ApplicationController
           else
             render json: { error: "comment not found" }, status: :not_found
           end
+    end
+
+    def delete
+      if @comment.valid?
+          @comment.destroy
+          render json: {}, status: :destroyed
+      else
+        render json: { error: "comment not found" }, status: :not_found
+      end
     end
 
     private

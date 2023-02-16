@@ -33,7 +33,7 @@ function CharPage ( { char , user , characters } ) {
 
         return (
             <>
-                <CharComments char={char} comment={comment}></CharComments>
+                <CharComments char={char} comment={comment} comms={comms} setComms={setComms} user={user}></CharComments>
             </>
         )
 
@@ -66,7 +66,7 @@ function CharPage ( { char , user , characters } ) {
                 </table>
             </div>
             <br></br>
-            {user?<CommentForm char={char} user={user} comms={comms} setComms={setComms}/>:null}
+            {user.username?<CommentForm char={char} user={user} comms={comms} setComms={setComms}/>:null}
             <br></br>
             <CharacterMenu characters={characters} commentPage={true}/>
         </>

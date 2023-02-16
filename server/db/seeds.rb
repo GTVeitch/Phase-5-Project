@@ -1579,7 +1579,7 @@ Character.all.map do |char|
 end
 
 
-puts "Creating Teams"
+#puts "Creating Teams"
 
 
 

@@ -1,10 +1,9 @@
 import React , { useState } from "react";
 
-function Login({ user , setUser }) {
+function Login({ user = {} , setUser }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("")
-
     function handleSubmit(e) {
       e.preventDefault();
       fetch("/login", {
@@ -16,7 +15,7 @@ function Login({ user , setUser }) {
       })
         .then((r) => r.json())
         .then((res) => {
-          res.username?setUser(res):setUser(null)})
+          res.username?setUser(res):setUser({})})
         }
 
 

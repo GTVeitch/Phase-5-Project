@@ -1,6 +1,6 @@
 import React , { useState } from "react"
 
-function CharComments ( { comment } ) {
+function CharComments ( { comment , comms , setComms , user } ) {
 
     const [votes, setVotes] = useState(comment.votes)
 
@@ -22,13 +22,23 @@ function CharComments ( { comment } ) {
 
         }
 
+        function handleDelete(e) {
+            e.preventDefault()
+            fetch(`/comments/${comment.id}`, {
+                method : 'DELETE'
+                   })
+                   .then(setComms(comms.filter((com) => com != comment )))
+        }
+
 
 
     return (
             <div className="comments">
                 <span className="details">
-                    <ul>{comment.username}</ul><span className="score" onClick={e => handleClick(e)} id={comment.id}>{votes}</span>
+                    <span>{comment.username}</span><span className="score" onClick={e => handleClick(e)} id={comment.id}>{votes}</span>
                     <ul>{comment.content}</ul>
+                    {(user.username == comment.username && user.id == comment.user_id)? <button className="score" onClick={handleDelete}>DELETE</button>:null}
+                    <br></br>
                 </span>
             </div>
         )
